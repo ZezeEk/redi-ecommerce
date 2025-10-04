@@ -32,7 +32,7 @@ function ProductList(){
                             : product.description}
                     </p>
                     <div className="mt-auto flex flex-col items-center">
-                        <span className="font-bold text-sm mb-1">${product.price}</span>
+                        <span className="font-bold text-sm mb-1">{product.price}€</span>
                         <button className="bg-blue-600 text-white px-3 py-0.5 rounded hover:bg-blue-700 transition text-xs">
                             Add to Cart
                         </button>
