@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './App.css'
-import Header from './component/Header'
-import Main from './component/Main'
-import ProductList from './component/product/ProductList'
-import Cart from './component/cart/Cart'
+import Header from './components/Header'
+import Main from './components/Main'
+import ProductList from './components/product/ProductList'
+import Cart from './components/cart/Cart'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,8 +13,8 @@ function App() {
       <div className="App">
         {/* <Header />
         <Main /> */}
-        {/* <ProductList/> */}
-        <Cart />
+        <ProductList/>
+        {/* <Cart /> */}
       </div>
     </>
   )
