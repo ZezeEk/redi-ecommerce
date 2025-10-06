@@ -1,31 +1,15 @@
 import { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
+import { useCart } from '../../hooks/useCart';
 
-function Cart() {
-  const [product, setProduct] = useState({
-    images: [],
-    title: "",
-    description: "",
-    price: 0,
-    rating: 0,
-    brand: "",
-    id: 0,
-  });
+function CartList() {
 
-  useEffect(() => {
-    async function fetchProducts() {
-      const response = await fetch("https://dummyjson.com/products");
-      const data = await response.json();
-      setProduct(data.products[0]);
-    }
-    fetchProducts();
-  }, []);
+  const { cart, removeFromCart } = useCart();
 
   return (
-    <div className="w-screen h-screen p-6 bg-gray-100">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
-        {/* Sol taraf */}
-        <div className="md:col-span-2 items-stretch bg-blue-200 p-4 rounded overflow-hidden shadow-lg">
+    <>
+      {cart.map((product) => (
+        <div className="md:col-span-2 items-stretch bg-gray-200 p-2 rounded overflow-hidden shadow-lg">
           <div
             key={product.id}
             className="flex flex-col bg-white rounded shadow p-2 md:flex-row justify-between items-center gap-4"
@@ -62,7 +46,7 @@ function Cart() {
 
             {/* Fiyat ve Çöp butonu */}
             <div className="flex flex-col items-center">
-              <button className="hover:text-red-800 transition">
+              <button onClick={()=> removeFromCart(product.id)} className="hover:text-red-800 transition">
                 <FaTrash className="text-red-700 w-4 h-4" />
               </button>
               <span className="font-bold text-sm mt-2.5">
@@ -71,14 +55,10 @@ function Cart() {
             </div>
           </div>
         </div>
-
-        {/* Sağ taraf */}
-        <div className="bg-green-200 p-4 rounded shadow-lg">
-          Sağ taraf (dar)
-        </div>
-      </div>
-    </div>
+      ))
+      }
+    </>
   );
 }
 
-export default Cart;
+export default CartList;

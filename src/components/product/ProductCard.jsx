@@ -1,19 +1,26 @@
-function ProductCard({title,description,price,image,rating}){
+import { useCart } from "../../hooks/useCart";
+
+function ProductCard({product}){
+    const {addToCart} = useCart();
+    
     return <>
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <img className="w-full" src={image} alt="Sunset in the mountains"/>
-            <div className="px-6 py-4">
-                <div className="font-bold mb-2">{title}</div>
-                <p className="text-gray-700 text-base">{description}</p>
-            </div>
-            <div className="px-6 pt-4 pb-2">
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{price}</span>
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{rating}</span>
-            </div>
-            <div className="px-6 pt-4 pb-2">
-                <button className="inline-block bg-amber-700 rounded-full px-3 py-1 text-sm font-semibold text-black mr-2 mb-2">Add to Cart</button>
-                {/* <button className="inline-block bg-amber-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{rating}</button> */}
-            </div>
+        <div
+            className="flex flex-col items-stretch bg-white rounded shadow p-2 max-w-[180px] mx-auto">
+                <img src={product.images[0]}
+                     alt={product.title}
+                     className="h-28 w-full object-cover mb-2 rounded"/>
+                <h2 className="font-semibold text-base mb-1 text-center">{product.title}</h2>
+                <p className="text-gray-600 text-xs mb-1 text-center">
+                        {product.description.length > 40
+                            ? product.description.slice(0, 40) + "..."
+                            : product.description}
+                </p>
+                <div className="mt-auto flex flex-col items-center">
+                    <span className="font-bold text-sm mb-1">{product.price}€</span>
+                    <button onClick={() => addToCart(product)} className="bg-amber-700 text-white px-3 py-0.5 rounded hover:opacity-80 transition text-xs">
+                        Add to Cart
+                    </button>
+                </div>
         </div>
     </>
 }
