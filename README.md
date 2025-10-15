@@ -1,4 +1,4 @@
-Zeynep Ekici ECommerce Project
+# Zeynep Ekici ECommerce Project
 
 # React + Vite
 
