@@ -4,7 +4,7 @@ import { useCart } from '../../hooks/useCart';
 
 function CartList() {
 
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, updateCartItem } = useCart();
 
   return (
     <>
@@ -14,7 +14,7 @@ function CartList() {
             key={product.id}
             className="flex flex-col bg-white rounded shadow p-2 md:flex-row justify-between items-center gap-4"
           >
-            {/* Ürün bilgisi */}
+            {/* Product Info */}
             <div className="flex items-center gap-3 w-full md:w-auto">
               <img
                 src={product.images[0]}
@@ -28,25 +28,27 @@ function CartList() {
               </div>
             </div>
 
-            {/* Artı / Eksi butonları */}
+            {/* + / - buttons */}
             <div className="flex items-center border border-gray-300 rounded-full overflow-hidden h-8 text-sm">
-              <button className="w-8 h-8 flex items-center justify-center text-amber-700 hover:bg-gray-100 focus:outline-none">
+              <button onClick={() => updateCartItem(product.id, 'DECREMENT_QUANTITY')}
+                className="w-8 h-8 flex items-center justify-center text-amber-700 hover:bg-gray-100 focus:outline-none">
                 −
               </button>
               <input
                 type="number"
                 readOnly
-                value={1}
+                value={product.quantity}
                 className="w-8 text-center font-semibold outline-none border-0 focus:ring-0 text-amber-700 bg-transparent"
               />
-              <button className="w-8 h-8 flex items-center justify-center text-amber-700 hover:bg-gray-100 focus:outline-none">
+              <button onClick={() => updateCartItem(product.id, 'INCREMENT_QUANTITY')}
+                className="w-8 h-8 flex items-center justify-center text-amber-700 hover:bg-gray-100 focus:outline-none">
                 +
               </button>
             </div>
 
-            {/* Fiyat ve Çöp butonu */}
+            {/* Price and Trash button */}
             <div className="flex flex-col items-center">
-              <button onClick={()=> removeFromCart(product.id)} className="hover:text-red-800 transition">
+              <button onClick={() => removeFromCart(product.id)} className="hover:text-red-800 transition">
                 <FaTrash className="text-red-700 w-4 h-4" />
               </button>
               <span className="font-bold text-sm mt-2.5">
